@@ -1,0 +1,14 @@
+li {
+    margin-bottom: 10px;
+}
+
+button {
+    font-size: 12px;
+    margin-left: 20px;
+    color: #666;
+}
+
+th,
+td {
+    padding-left: 15px;
+}

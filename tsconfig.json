@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "ES6",
+        "outDir": "out",
+        "sourceMap": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "declaration": true,
+        "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
+        "strictNullChecks": true /* Enable strict null checks. */,
+        "strictFunctionTypes": true /* Enable strict checking of function types. */,
+        "noUnusedLocals": true /* Report errors on unused locals. */,
+        "noUnusedParameters": true /* Report errors on unused parameters. */,
+        "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
+        "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+        "importHelpers": false, /* had to set this to false due to ts 2354 errors */
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        /* "types": [ "node", "jest" ], */
+        "lib": [
+            "ES6",
+            "DOM"
+        ]
+    },
+    "include": [
+        "./*.ts",
+        "types" /* this is needed to include skypack.d.ts file, to use CDN */
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.test.ts"
+    ]
+}
