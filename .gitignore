@@ -1,3 +1,6 @@
 local.settings.json
-out/
+out/*.ts
+out/*.map
+out/modules/*.ts
+out/modules/*.map
 node_modules/
