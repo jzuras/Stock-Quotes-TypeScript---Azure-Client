@@ -1,4 +1,4 @@
-# ZOD-Stock-Quotes-TypeScript---Azure-Client
+# Stock-Quotes-TypeScript---Azure-Client
 
 This is part of a new version of my original Stock Quotes repo, continuing my Learning Journey.
 This part is the TypeScript Client for Azure Functions. As with the original JS repo, this is not
