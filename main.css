@@ -8,6 +8,9 @@ button {
     color: #666;
 }
 
+td > button {
+    margin-left: 0px;
+}
 th,
 td {
     padding-left: 15px;
