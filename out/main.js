@@ -55,7 +55,7 @@ function getQuoteButtonClick() {
         inputStockSymbol.focus();
         return;
     }
-    const companyStockDataPromise = getStockQuote(stockSymbol);
+    const companyStockDataPromise = getStockQuote(stockSymbol, false);
     companyStockDataPromise
         .then((data) => {
         if (data.error == false)
@@ -177,7 +177,7 @@ function refreshQuote(row) {
         if (mapValue.refreshCounter === 1)
             refreshButton.disabled = true;
     }
-    const companyDataPromise = getStockQuote(stockSymbol);
+    const companyDataPromise = getStockQuote(stockSymbol, true);
     companyDataPromise
         .then((data) => {
         if (data.error == false)
@@ -214,7 +214,7 @@ function updateRow(row, data) {
     (row.childNodes[quoteColumnIndex]).innerText =
         data.quote.toFixed(2).toString();
     (row.childNodes[quoteColumnIndex + 1]).innerText =
-        toLocalFormat(data.timeOfQuote);
+        toLocalFormat(new Date().toString());
 }
 /**
  * Makes chart visible, updates label indicating current stock symbol

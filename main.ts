@@ -88,7 +88,7 @@ function getQuoteButtonClick()
     }
 
     const companyStockDataPromise =
-        getStockQuote( stockSymbol );
+        getStockQuote( stockSymbol, false );
     companyStockDataPromise
         .then( ( data ) =>
         {
@@ -244,7 +244,7 @@ function refreshQuote( row: HTMLTableRowElement )
         if ( mapValue.refreshCounter === 1 ) refreshButton.disabled = true;
     }
 
-    const companyDataPromise = getStockQuote( stockSymbol );
+    const companyDataPromise = getStockQuote( stockSymbol, true );
     companyDataPromise
         .then( ( data ) =>
         {
@@ -291,7 +291,7 @@ function updateRow( row: HTMLTableRowElement, data: StockData )
     ( ( row.childNodes[quoteColumnIndex] ) as HTMLTableSectionElement ).innerText =
         data.quote.toFixed(2).toString();
     ( ( row.childNodes[quoteColumnIndex + 1] ) as HTMLTableSectionElement ).innerText =
-        toLocalFormat( data.timeOfQuote );
+        toLocalFormat( new Date().toString() );
 }
 
 

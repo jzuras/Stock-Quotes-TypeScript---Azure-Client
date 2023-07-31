@@ -33,7 +33,7 @@ export const TwelveDataTimeSeriesSchema = z.object({
 export function getTimeSeries(symbolToUse) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            // local URL to testing purposes - need to run serer as func host start --cors *
+            // local URL for testing purposes - need to run serer as func host start --cors *
             //        const apiURL: string = 'http://localhost:7071/api/GetTimeSeries?symbol=';
             const apiURL = 'https://stockquotes-jcz-c-sharp.azurewebsites.net/api/GetTimeSeries?symbol=';
             const apiString = apiURL + encodeURI(symbolToUse);

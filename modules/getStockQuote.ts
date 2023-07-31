@@ -32,15 +32,16 @@ export type ReturnedStockData = z.infer<typeof ReturnedStockDataSchema>;
  * @param symbolToUse - Ticker symbol for which to get data.
  * @return ReturnedStockData Promise, which includes either data or error info.
  */
-export async function getStockQuote( symbolToUse : string )
+export async function getStockQuote( symbolToUse : string, useRealTime : boolean )
 {
     try 
     {
-        // local URL to testing purposes - need to run serer as func host start --cors *
+        // local URL for testing purposes - need to run serer as func host start --cors *
 //        const apiURL: string = 'http://localhost:7071/api/GetStockQuote?symbol=';
         const apiURL = 'https://stockquotes-jcz-c-sharp.azurewebsites.net/api/GetStockQuote?symbol=';
 
-        const apiString = apiURL + encodeURI( symbolToUse );
+        let apiString = apiURL + encodeURI( symbolToUse );
+        if ( useRealTime ) apiString += '&realtime=1';
         const response = await fetch( apiString );
 
         if ( !response.ok ) 
