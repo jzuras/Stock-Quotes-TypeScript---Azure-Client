@@ -15,3 +15,5 @@ and since QuickType included that as an option, I decided to try it.
 
 This caused me to learn all about using a Node.js package in an HTML page. I initially went down the
 rabbit-hole of the various bundling options like webpack, but I ended up using SkyPack CDN. I go into more detail on this in my discussion on [LinkedIn](https://www.linkedin.com/feed/update/urn:li:share:7092217565648723968/).
+
+This code is running on [GitHub Pages](https://jzuras.github.io/Stock-Quotes-TypeScript---Azure-Client/).
