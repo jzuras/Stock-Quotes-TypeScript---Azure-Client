@@ -1,20 +1,20 @@
-import * as z from 'https://cdn.skypack.dev/zod@3.5.1';
+import * as z from 'https://cdn.skypack.dev/superstruct';
 
 
-//#region Zod Object Definitions:
+//#region Superstruct Object Definitions:
 
 export const StockDatumSchema = z.object( {
     "x": z.string(),
     "y": z.number(),
 } );
-export type StockDatum = z.infer<typeof StockDatumSchema>;
+export type StockDatum = z.Infer<typeof StockDatumSchema>;
 
 export const ErrorDataSchema = z.object( {
     "code": z.number(),
     "message": z.string(),
     "status": z.string(),
 } );
-export type ErrorData = z.infer<typeof ErrorDataSchema>;
+export type ErrorData = z.Infer<typeof ErrorDataSchema>;
 
 export const TwelveDataTimeSeriesSchema = z.object( {
     "stockData": z.array( StockDatumSchema ),
@@ -22,7 +22,7 @@ export const TwelveDataTimeSeriesSchema = z.object( {
     "error": z.boolean(),
 } );
 
-export type TimeSeriesStockData = z.infer<typeof TwelveDataTimeSeriesSchema>;
+export type TimeSeriesStockData = z.Infer<typeof TwelveDataTimeSeriesSchema>;
 
 //#endregion
 
@@ -50,14 +50,17 @@ export async function getTimeSeries( symbolToUse : string )
         }
 
         let responseText = await response.text();
-        console.log( responseText );
-        return ( TwelveDataTimeSeriesSchema.parse( JSON.parse( responseText ) ) );
+
+        // this assert will throw an error if the responseText is not the correct shape
+        z.assert( JSON.parse( responseText ), TwelveDataTimeSeriesSchema );
+
+        return ( JSON.parse( responseText ) );
     }
     catch ( error )
     {
-        if ( error instanceof z.ZodError )
+        if ( error instanceof z.StructError )
         {
-            console.log( error.issues );
+            console.log( error.message );
         }
         throw error;
     }
