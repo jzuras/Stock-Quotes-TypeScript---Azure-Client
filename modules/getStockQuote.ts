@@ -1,6 +1,6 @@
-import * as z from 'https://cdn.skypack.dev/zod@3.5.1';
+import * as z from 'https://cdn.skypack.dev/superstruct';
 
-//#region Zod Object Definitions:
+//#region Superstruct Object Definitions:
 
 export const StockDataSchema = z.object( {
     "companySymbol": z.string(),
@@ -8,21 +8,21 @@ export const StockDataSchema = z.object( {
     "quote": z.number(),
     "timeOfQuote": z.string(),
 } );
-export type StockData = z.infer<typeof StockDataSchema>;
+export type StockData = z.Infer<typeof StockDataSchema>;
 
 export const ErrorDataSchema = z.object( {
     "code": z.number(),
     "message": z.string(),
     "status": z.string(),
 } );
-export type ErrorData = z.infer<typeof ErrorDataSchema>;
+export type ErrorData = z.Infer<typeof ErrorDataSchema>;
 
 export const ReturnedStockDataSchema = z.object( {
     "stockData": StockDataSchema,
     "errorData": ErrorDataSchema,
     "error": z.boolean(),
 } );
-export type ReturnedStockData = z.infer<typeof ReturnedStockDataSchema>;
+export type ReturnedStockData = z.Infer<typeof ReturnedStockDataSchema>;
 
 //#endregion
 
@@ -49,13 +49,17 @@ export async function getStockQuote( symbolToUse : string )
         }
       
         let responseText = await response.text();
-        return ( ReturnedStockDataSchema.parse( JSON.parse( responseText ) ) );
+
+        // this assert will throw an error if the responseText is not the correct shape
+        z.assert( JSON.parse( responseText ), ReturnedStockDataSchema );
+
+        return ( JSON.parse( responseText ) );
     }
     catch ( error )
     {
-        if ( error instanceof z.ZodError )
+        if ( error instanceof z.StructError )
         {
-            console.log( error.issues );
+            console.log( error.message );
         }
         throw error;
     }

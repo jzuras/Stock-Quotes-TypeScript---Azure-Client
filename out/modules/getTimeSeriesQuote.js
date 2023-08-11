@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as z from 'https://cdn.skypack.dev/zod@3.5.1';
-//#region Zod Object Definitions:
+import * as z from 'https://cdn.skypack.dev/superstruct';
+//#region Superstruct Object Definitions:
 export const StockDatumSchema = z.object({
     "x": z.string(),
     "y": z.number(),
@@ -42,12 +42,13 @@ export function getTimeSeries(symbolToUse) {
                 throw new Error(`HTTP error: ${response.status}`);
             }
             let responseText = yield response.text();
-            console.log(responseText);
-            return (TwelveDataTimeSeriesSchema.parse(JSON.parse(responseText)));
+            // this assert will throw an error if the responseText is not the correct shape
+            z.assert(JSON.parse(responseText), TwelveDataTimeSeriesSchema);
+            return (JSON.parse(responseText));
         }
         catch (error) {
-            if (error instanceof z.ZodError) {
-                console.log(error.issues);
+            if (error instanceof z.StructError) {
+                console.log(error.message);
             }
             throw error;
         }

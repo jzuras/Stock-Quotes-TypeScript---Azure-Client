@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "zod": "^3.21.4"
+    "superstruct": "^1.0.3"
   }
 }
