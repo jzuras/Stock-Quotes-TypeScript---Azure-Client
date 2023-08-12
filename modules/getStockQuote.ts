@@ -1,4 +1,4 @@
-import * as z from 'https://cdn.skypack.dev/superstruct';
+import * as z from 'https://cdn.skypack.dev/pin/superstruct@v1.0.3-yP8v6jYc8g9oW4NL2673/mode=imports,min/optimized/superstruct.js';
 
 //#region Superstruct Object Definitions:
 
